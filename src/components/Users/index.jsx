@@ -26,6 +26,7 @@ export const Users = ({
           <Skeleton />
           <Skeleton />
           <Skeleton />
+          <Skeleton />
         </div>
       ) : (
         <ul className="users-list">
