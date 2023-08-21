@@ -7,7 +7,9 @@ import { Users } from "./components/Users";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [invites, setInvites] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [succes, setSucces] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   //обращение к backend для получения данных
@@ -28,15 +30,31 @@ function App() {
     setSearchValue(event.target.value);
   };
 
+  const OnClickInvite = (id) => {
+    if (invites.includes(id))
+      setInvites((prev) => prev.filter((_id) => _id != id));
+    else setInvites((prev) => [...prev, id]);
+  };
+
+  const OnClickSendInvite = () => {
+    setSucces(true);
+  };
+
   return (
     <div className="App">
-      <Users
-        OnChangeSearchValue={OnChangeSearchValue}
-        searchValue={searchValue}
-        items={users}
-        isLoading={isLoading}
-      />
-      {/* <Success /> */}
+      {succes ? (
+        <Success count={invites.length} />
+      ) : (
+        <Users
+          OnClickSendInvite={OnClickSendInvite}
+          OnClickInvite={OnClickInvite}
+          invites={invites}
+          OnChangeSearchValue={OnChangeSearchValue}
+          searchValue={searchValue}
+          items={users}
+          isLoading={isLoading}
+        />
+      )}
     </div>
   );
 }
