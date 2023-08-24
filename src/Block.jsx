@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const defaultCurrencies = ['RUB', 'USD', 'EUR', 'GBP'];
+const defaultCurrencies = ["RUB", "USD", "EUR", "GBP"];
 
 export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
   <div className="block">
@@ -8,8 +8,9 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
       {defaultCurrencies.map((cur) => (
         <li
           onClick={() => onChangeCurrency(cur)}
-          className={currency === cur ? 'active' : ''}
-          key={cur}>
+          className={currency === cur ? "active" : ""}
+          key={cur}
+        >
           {cur}
         </li>
       ))}
@@ -22,7 +23,8 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
     </ul>
     <input
       onChange={(e) => onChangeValue(e.target.value)}
-      value={value}
+      // value={value}
+      value={isNaN(value) ? "" : value}
       type="number"
       placeholder={0}
     />
